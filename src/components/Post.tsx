@@ -1,7 +1,22 @@
+import { format, formatDistanceToNow } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
+
 import styles from './Post.module.css'
 
 
 export function Post(){
+
+      const publishedDate = new Date('2026-03-09 14:32:22')
+      const publishedDateFormatted = format(publishedDate, "d 'de' LLLL 'às' HH:mm", {
+        locale: ptBR,
+      })
+      const publishedDateRelativeToNow = formatDistanceToNow(publishedDate,{
+        locale: ptBR,
+        addSuffix: true,
+      })
+
+
+
     return (
         <article className={styles.post}>
             <header>
@@ -15,8 +30,8 @@ export function Post(){
                 </div>
                 </div>
 
-                <time title="09 de Março de 2026" dateTime="2026-03-09 18:10:58">
-                    Publicado Há 2h
+                <time title={publishedDateFormatted} dateTime={publishedDate.toISOString()}>
+                    Publicado há {publishedDateRelativeToNow}
                 </time>
 
             </header>
@@ -37,7 +52,15 @@ export function Post(){
                     </p>
                 </div>
 
+                <form className={styles.commentForm}>
+                    <strong>Deixe seu feedback</strong>
 
+                    <textarea placeholder="Deixe um comentário"/>
+
+                    <footer>
+                        <button type="submit">Publicar</button>
+                    </footer>
+                </form>
 
 
         </article>

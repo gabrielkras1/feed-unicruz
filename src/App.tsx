@@ -7,6 +7,9 @@ import styles from './App.module.css'
 
 
 export function App(){
+
+
+
   return (
     <div>
   <Header />
@@ -18,7 +21,7 @@ export function App(){
         <Post/>
         <Post/>
         </main>
-        
+
       </div>
     </div>
   )
