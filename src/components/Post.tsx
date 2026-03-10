@@ -67,6 +67,15 @@ export function Post({ author, content, publishedAt }: PostProps) {
             
         }
 
+        function deleteComment(commentToDelete: string) {
+        // Aplicando o conceito de imutabilidade: 
+        // Criamos uma nova lista sem o comentário específico
+        const commentsWithoutDeletedOne = comments.filter(comment => {
+            return comment !== commentToDelete;
+        });
+
+        setComments(commentsWithoutDeletedOne);
+        }
 
     return (
         <article className={styles.post}>
@@ -115,11 +124,15 @@ export function Post({ author, content, publishedAt }: PostProps) {
                 </form>
 
                 <div className={styles.commentList}>
-                    {comments.map(comment => {
-                        return (
-                            <Comment key={comment} content={comment}/>
-                        )
-                    })}
+                {comments.map(comment => {
+                    return (
+                    <Comment 
+                        key={comment} 
+                        content={comment} 
+                        onDeleteComment={deleteComment} // Nova prop
+                    />
+                    )
+                })}
                 </div>
 
         </article>
