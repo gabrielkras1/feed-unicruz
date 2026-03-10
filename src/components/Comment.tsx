@@ -2,9 +2,11 @@ import styles from './Comment.module.css'
 import {ThumbsUp, Trash} from '@phosphor-icons/react'
 import {Avatar} from './Avatar'
 
+interface CommentProps {
+  content:string
+}
 
-
-export function Comment() {
+export function Comment({content} : CommentProps) {
     return (
   <div className={styles.comment}>
     <Avatar src="https://i.pravatar.cc/300" hasBorder={false} />
@@ -26,7 +28,7 @@ export function Comment() {
 
         </header>
 
-        <p>Muito bom! Parabéns pelo projeto! 👏</p>
+        <p>{content}</p>
       </div>
 
       <footer>

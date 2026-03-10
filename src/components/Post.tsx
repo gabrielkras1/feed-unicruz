@@ -2,7 +2,7 @@ import { format, formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { Comment } from './Comment'
 import { Avatar } from './Avatar'
-
+import React, { useState } from 'react'
 
 
 import styles from './Post.module.css'
@@ -20,15 +20,16 @@ interface PostProps {
   publishedAt: Date;
 }
 
-const comments = [
-    1, 2, 3
-]
+
 
 
 
 
 export function Post({ author, content, publishedAt }: PostProps) {
 
+
+    const [comments, setComments] = useState(['Muito bom esse post!'])
+    const [newCommentText, setNewCommentText] = useState('')
 
       const publishedDate = publishedAt
       const publishedDateFormatted = format(publishedDate, "d 'de' LLLL 'às' HH:mm", {
@@ -39,6 +40,32 @@ export function Post({ author, content, publishedAt }: PostProps) {
         addSuffix: true,
       })
 
+
+        function handleCreateNewComment(event: any) {
+            event.preventDefault()
+
+            //...COMMENTS = ESPALHA TODOS OS COMENTARIOS QUE JA EXISTEM
+            //setComments([...comments, comments.length + 1])
+            //IMUTABILIDADE = NUNCA ALTERAR O VALOR DA VARIAVEL DIRETAMENTE
+            //console.log(comments)
+
+            //PROGRAMACAO IMPERATIVA
+            //console.log(event.target.comment.value)
+            //const newCommentText = event.target.comment.value
+
+            //setComments([...comments, newCommentText])
+            //event.target.comment.value = ''
+
+            //PROGRAMAÇÃO DECLARATIVA
+            setComments(prevComments => [...prevComments, newCommentText])
+            setNewCommentText('')
+        }
+
+
+        function handleNewCommentChange(event: any) {
+            setNewCommentText(event.target.value)
+            
+        }
 
 
     return (
@@ -69,20 +96,28 @@ export function Post({ author, content, publishedAt }: PostProps) {
                     })}
                 </div>
 
-                <form className={styles.commentForm}>
+                <form className={styles.commentForm} onSubmit={handleCreateNewComment}>
                     <strong>Deixe seu feedback</strong>
 
-                    <textarea placeholder="Deixe um comentário"/>
+                    <textarea 
+                    name="comment"
+                    placeholder="Deixe um comentário"
+                    onChange={handleNewCommentChange}
+                    value={newCommentText}
+                    required
+                    />
 
                     <footer>
-                        <button type="submit">Publicar</button>
+                        <button type="submit">
+                            Publicar
+                        </button>
                     </footer>
                 </form>
 
                 <div className={styles.commentList}>
                     {comments.map(comment => {
                         return (
-                            <Comment key={comment} />
+                            <Comment key={comment} content={comment}/>
                         )
                     })}
                 </div>
