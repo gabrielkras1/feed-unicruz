@@ -1,6 +1,8 @@
 import { format, formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { Comment } from './Comment'
+import { Avatar } from './Avatar'
+
 
 
 import styles from './Post.module.css'
@@ -23,7 +25,7 @@ export function Post(){
         <article className={styles.post}>
             <header>
                 <div className={styles.author}>
-                    <img className={styles.avatar} src="https://i.pravatar.cc/150?u=gabrielkras" alt=""/>
+                    <Avatar src="https://i.pravatar.cc/500" hasBorder={true}/>
                 
                 <div className={styles.authorInfo}>
                 <strong>Gabriel Kras</strong>

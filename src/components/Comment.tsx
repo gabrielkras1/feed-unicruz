@@ -7,7 +7,7 @@ import {Avatar} from './Avatar'
 export function Comment() {
     return (
   <div className={styles.comment}>
-    <Avatar />
+    <Avatar src="https://i.pravatar.cc/300" hasBorder={false} />
 
     <div className={styles.commentBox}>
       <div className={styles.commentContent}>
